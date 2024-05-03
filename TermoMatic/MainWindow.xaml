@@ -1,0 +1,88 @@
+﻿<Window x:Class="TermoMatic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TermoMatic"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280">
+
+    <TabControl>
+        <TabItem Header="Importar Archivo">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#BEA1EB" Offset="0.20"/>
+                        <GradientStop Color="#FF750098" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="50">
+                    <Label Content="NOMBRE DEL ARCHIVO SELECCIONADO:" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock x:Name="tbNombreArchivo" Text="SELECCIONE UN ARCHIVO PRIMERO." Background="White" FontSize="25"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="50">
+                    <Label Content="RUTA DEL ARCHIVO SELECCIONADO:" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock x:Name="tbRutaArchivo" Text="SELECCIONE UN ARCHIVO PRIMERO." Background="White" FontSize="25"/>
+                </StackPanel>
+
+                <Grid Grid.Row="2" Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btSeleccionarArchivo" Content="SELECCIONAR ARCHIVO" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="0" Grid.Row="2" FontWeight="Bold"/>
+                    <Button x:Name="btImportarArchivo" Content="IMPORTAR ARCHIVO" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="1" Grid.Row="2" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Editar Temperaturas">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#BEA1EB" Offset="0.20"/>
+                        <GradientStop Color="#FF750098" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <DataGrid x:Name="dgTemperaturas" FontSize="25" Grid.Row="1" FrozenColumnCount="1" Margin="10" BorderBrush="Black" BorderThickness="2"/>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btSeleccionarTempsDb" Content="SELECCIONAR FECHA" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="0" FontWeight="Bold"/>
+                    <Button x:Name="btGuardarCambiosDb" Content="GUARDAR" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="1" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Editor Grafico">
+
+        </TabItem>
+        <TabItem Header="Reportes">
+
+        </TabItem>
+
+    </TabControl>
+</Window>
