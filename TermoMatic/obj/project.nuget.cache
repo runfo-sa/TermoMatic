@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mKqlRPFKJfDTnIkqkDi2+67HYB0owFdgl4pev3yx0aiLyjG+/zfP4+/YYF2F3rEMnxFp8cFWgpo/25Rm3P1ifw==",
+  "dgSpecHash": "o5ARAbbkyHeMRQl8M9RK+MGHX4h4weB+WZJQhWrBq27VcBa0f2Nw+SQkxuIXRqcwwavSHhlhA3xdvq93GqBhLw==",
   "success": true,
-  "projectFilePath": "D:\\DesarrollosRunfescos\\TermoMatic_Final\\TermoMatic\\TermoMatic\\TermoMatic.csproj",
+  "projectFilePath": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\TermoMatic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sistemas.runfo\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\sistemas.runfo\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

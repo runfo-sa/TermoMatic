@@ -42,8 +42,8 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="btSeleccionarArchivo" Content="SELECCIONAR ARCHIVO" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="0" Grid.Row="2" FontWeight="Bold"/>
-                    <Button x:Name="btImportarArchivo" Content="IMPORTAR ARCHIVO" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="1" Grid.Row="2" FontWeight="Bold"/>
+                    <Button x:Name="btSeleccionarArchivo" Content="SELECCIONAR ARCHIVO" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="0" Grid.Row="2" FontWeight="Bold" Click="btSeleccionarArchivoClick"/>
+                    <Button x:Name="btImportarArchivo" Content="IMPORTAR ARCHIVO" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="1" Grid.Row="2" FontWeight="Bold" Click="btImportarArchivoClick"/>
                 </Grid>
             </Grid>
         </TabItem>
@@ -65,16 +65,16 @@
                     </LinearGradientBrush>
                 </Grid.Background>
 
-                <DataGrid x:Name="dgTemperaturas" FontSize="25" Grid.Row="1" FrozenColumnCount="1" Margin="10" BorderBrush="Black" BorderThickness="2"/>
+                <DataGrid x:Name="dgTemperaturas" FontSize="25" Grid.Row="1" FrozenColumnCount="1" Margin="10" BorderBrush="Black" BorderThickness="2" CellEditEnding="dgTemperaturasCellEditEnding"/>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-
-                    <Button x:Name="btSeleccionarTempsDb" Content="SELECCIONAR FECHA" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="0" FontWeight="Bold"/>
+                    <DatePicker x:Name="dpFechaRegistros" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" BorderBrush="Black" BorderThickness="2" FontWeight="Bold" SelectedDateChanged="dpFechaRegistrosSelectedDateChanged"/>
                     <Button x:Name="btGuardarCambiosDb" Content="GUARDAR" BorderBrush="Black" BorderThickness="2" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Grid.Column="1" FontWeight="Bold"/>
                 </Grid>
+                
             </Grid>
         </TabItem>
         <TabItem Header="Editor Grafico">

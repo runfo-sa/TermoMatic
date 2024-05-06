@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -14,7 +15,7 @@ namespace TermoMatic
     {
         //Los atributos necesarios para una temperatura son Lector, Lectura y Registro. EJ: (T1, -24.5, 20/05/2024 01:30:00)
         private string _lector;
-        private double _lectura;
+        private decimal _lectura;
         private DateTime _registro;
 
         public string Lector 
@@ -23,7 +24,7 @@ namespace TermoMatic
             set { _lector = value; } 
         }
 
-        public double Lectura
+        public decimal Lectura
         {
             get { return _lectura; }
             set { _lectura = value; }
@@ -48,14 +49,28 @@ namespace TermoMatic
             Lector = lector;
             Registro = registro;
 
-            if (double.TryParse(lectura.Replace(',', '.'), CultureInfo.InvariantCulture, out double lecturaProcesada))
+            if (decimal.TryParse(lectura.Replace(',', '.'), CultureInfo.InvariantCulture, out decimal lecturaProcesada))
+                Lectura = lecturaProcesada;
+            else
+                Lectura = 0;
+        }
+
+        public Temperatura(string lector, string lectura, string registro)
+        {
+            Lector = lector;
+            if (DateTime.TryParse(registro, out DateTime fecha))
+                Registro = fecha;
+            else
+                Registro = DateTime.MinValue;
+
+            if (decimal.TryParse(lectura.Replace(',', '.'), CultureInfo.InvariantCulture, out decimal lecturaProcesada))
                 Lectura = lecturaProcesada;
             else
                 Lectura = 0;
         }
 
 
-        //Nuestros queridos métodos, llamados de cariño funciones.
+        //Nuestros queridos métodos, mal llamados de cariño funciones.
 
         /// <summary>
         /// Esta función lee las temperaturas desde un archivo dado y las devuelve como una lista de objetos de tipo Temperatura.
@@ -91,16 +106,15 @@ namespace TermoMatic
                     // Iteramos sobre los campos
                     foreach (string campo in campos)
                     {
-                        // Verificamos si el campo contiene una fecha y hora válida
-                        // para actualizar la fecha y hora actual
+                        // Verificamos si el campo contiene una fecha y hora válida, para actualizar la fecha y hora actual
                         if (campo.Contains('/') && DateTime.TryParseExact(campo, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dtLeido))
                             dtActual = dtLeido;
 
                         // Dividimos el campo en partes separadas por ':'
                         string[] cadTemp = campo.Split(':');
 
-                        // Verificamos si hay partes en el campo
-                        if (cadTemp.Length == 0)
+                        // Verificamos si hay partes en el campo, nos interesa que haya 2 (Lector y valor)
+                        if (cadTemp.Length == 2)
                         {
                             // Obtenemos el lector y la lectura de la temperatura
                             string lector = cadTemp[0];
@@ -141,7 +155,7 @@ namespace TermoMatic
                 conexion.Open();
 
                 // Creamos un comando SQL para insertar los datos en la base de datos utilizando un procedimiento almacenado
-                using SqlCommand comando = new("registros.InsertarTemperaturasDesdeTabla", conexion);
+                using SqlCommand comando = new("registros.InsertarTemperaturaDesdeTabla", conexion);
 
                 // Especificamos que el comando es un procedimiento almacenado
                 comando.CommandType = CommandType.StoredProcedure;
@@ -236,10 +250,38 @@ namespace TermoMatic
                         i[temp.Lector] = temp.Lectura.ToString();
                 }
             }
-
             // Devolvemos el DataTable con la representación visualmente compacta de las temperaturas
             return dt;
         }
 
+
+        public static List<Temperatura> LeerTemperaturasDelDiaSQL(DateTime fecha, string cadConexionDb)
+        {
+            List<Temperatura> temps = [];
+
+            using SqlConnection sqlCon = new(cadConexionDb);
+
+            sqlCon.Open();
+
+            using SqlCommand comando = new("SELECT t.fecha, t.temperatura, l.descripcion" +
+                " FROM registros.Temperatura t INNER JOIN configuracion.lector l on l.id = t.lectorId" +
+                " WHERE DATEDIFF(DAYOFYEAR, fecha, '" + fecha.ToString("s", CultureInfo.InvariantCulture) + "') = 0", sqlCon);
+
+            using SqlDataReader sqlDataReader = comando.ExecuteReader();
+
+            while(sqlDataReader.Read())
+            {
+                Temperatura temp = new()
+                {
+                    Registro = sqlDataReader.GetDateTime(0),
+                    Lectura = sqlDataReader.GetDecimal(1),
+                    Lector = sqlDataReader.GetString(2)
+                };
+
+                temps.Add(temp);
+            }
+
+            return temps;
+        }
     }
 }
