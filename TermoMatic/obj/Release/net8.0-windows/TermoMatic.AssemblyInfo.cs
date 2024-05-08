@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TermoMatic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d7f30c0eb123922f7303298af26f910daa0074a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64a390331203186897c1d882a7dc1460fe09b0ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("TermoMatic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TermoMatic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

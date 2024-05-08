@@ -24,7 +24,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                </Grid.RowDefinitions>
+                </Grid.RowDefinitions >
 
                 <StackPanel Grid.Row="0" Margin="50">
                     <Label Content="NOMBRE DEL ARCHIVO SELECCIONADO:" FontSize="20" FontWeight="Bold"/>

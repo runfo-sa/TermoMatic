@@ -7,16 +7,12 @@
       "RelativeMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|solutionrelative:termomatic\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|d:\\desarrollosrunfescos\\github\\termomatic\\termomatic\\configuracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\termomatic\\configuracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|solutionrelative:termomatic\\configuracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\termomatic\\temperatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|solutionrelative:termomatic\\temperatura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|d:\\desarrollosrunfescos\\github\\termomatic\\termomatic\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D4103D4B-DF23-493D-BE65-4F988BA9E3DD}|TermoMatic\\TermoMatic.csproj|solutionrelative:termomatic\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +22,15 @@
       "DocumentGroups": [
         {
           "DockedHeight": 284,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
@@ -40,9 +40,9 @@
               "RelativeDocumentMoniker": "TermoMatic\\MainWindow.xaml.cs",
               "ToolTip": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\MainWindow.xaml.cs",
               "RelativeToolTip": "TermoMatic\\MainWindow.xaml.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAAC8AAAAJAAAA",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAAFAAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-06T15:08:19.236Z",
+              "WhenOpened": "2024-05-06T19:48:45.197Z",
               "EditorCaption": ""
             },
             {
@@ -60,28 +60,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "TermoMatic\\MainWindow.xaml",
-              "ToolTip": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\MainWindow.xaml",
-              "RelativeToolTip": "TermoMatic\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-03T13:46:45.983Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Temperatura.cs",
               "DocumentMoniker": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\Temperatura.cs",
               "RelativeDocumentMoniker": "TermoMatic\\Temperatura.cs",
               "ToolTip": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\Temperatura.cs",
               "RelativeToolTip": "TermoMatic\\Temperatura.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAAADwAAAAqAAAA",
+              "ViewState": "AQIAAPMAAAAAAAAAAAAAADwAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T13:47:43.993Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-03T13:47:43.993Z"
             }
           ]
         }
