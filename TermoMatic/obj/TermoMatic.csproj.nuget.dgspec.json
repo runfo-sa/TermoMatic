@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\TermoMatic.csproj": {}
+    "E:\\Git_\\TermoMatic\\TermoMatic.csproj": {}
   },
   "projects": {
-    "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\TermoMatic.csproj": {
+    "E:\\Git_\\TermoMatic\\TermoMatic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\TermoMatic.csproj",
+        "projectUniqueName": "E:\\Git_\\TermoMatic\\TermoMatic.csproj",
         "projectName": "TermoMatic",
-        "projectPath": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\TermoMatic.csproj",
-        "packagesPath": "C:\\Users\\sistemas.runfo\\.nuget\\packages\\",
-        "outputPath": "D:\\DesarrollosRunfescos\\GitHub\\TermoMatic\\TermoMatic\\obj\\",
+        "projectPath": "E:\\Git_\\TermoMatic\\TermoMatic.csproj",
+        "packagesPath": "C:\\Users\\Tony\\.nuget\\packages\\",
+        "outputPath": "E:\\Git_\\TermoMatic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sistemas.runfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tony\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,8 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://www.nuget.org/api/v2": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
