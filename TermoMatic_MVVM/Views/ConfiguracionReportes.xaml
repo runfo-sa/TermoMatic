@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="TermoMatic_MVVM.Views.ConfiguracionReportes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TermoMatic_MVVM.Views" 
+             xmlns:vm="clr-namespace:TermoMatic_MVVM.ViewModels"
+             xmlns:resources="clr-namespace:TermoMatic_MVVM.Resources"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="#FF1D012F">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Viewbox Grid.Row="1" Grid.Column="1">
+            <DatePicker x:Name="dpFechaRegistros"
+                        SelectedDate="{Binding FechaSeleccionada}"
+                        FontWeight="Bold"
+                        BorderBrush="{x:Null}"
+                        Background="{x:Null}">
+            </DatePicker>
+        </Viewbox>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ListBox Name="lbColumnaLectores" 
+                 SelectionMode = "Multiple" 
+                 Grid.Row="0"
+                 ItemsSource="{Binding LectoresObservables, Mode=TwoWay}"
+                 ></ListBox>
+
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="1">
+                    <Button Content="CANCELAR" Command="{Binding CancelarConfiguracionCommand}"/>
+                </Viewbox>
+                
+                <Viewbox Grid.Column="3">
+                    <Button Content="ACEPTAR"
+                            CommandParameter="{Binding ElementName=lbColumnaLectores, Path=SelectedItems}"
+                            Command="{Binding AceptarConfiguracionCommand}"/>
+                </Viewbox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
