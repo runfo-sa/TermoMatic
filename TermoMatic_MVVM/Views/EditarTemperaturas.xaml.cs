@@ -25,5 +25,20 @@ namespace TermoMatic_MVVM.Views
         {
             InitializeComponent();
         }
+
+        private void dgTemperaturas_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                if (e.EditingElement is TextBox textBox)
+                {
+                    if (!decimal.TryParse(textBox.Text, out decimal result))
+                    {
+                        MessageBox.Show("Por favor ingrese un número válido.", "Entrada inválida", MessageBoxButton.OK, MessageBoxImage.Error);
+                        e.Cancel = true;
+                    }
+                }
+            }
+        }
     }
 }

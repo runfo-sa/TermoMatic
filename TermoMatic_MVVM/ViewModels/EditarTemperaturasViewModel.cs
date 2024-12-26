@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
+using System.Dynamic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,12 +12,38 @@ using TermoMatic_MVVM.Models;
 
 namespace TermoMatic_MVVM.ViewModels
 {
+    public class TemperaturaPivot
+    {
+        public DateTime Registro { get; set; }
+        public Dictionary<string, decimal> _lecturas { get; set; } = [];
+
+        public void SetLectura(string lector, decimal lectura)
+        {
+            _lecturas[lector] = lectura;
+        }
+
+        public decimal GetLectura(string lector)
+        {
+            return _lecturas.TryGetValue(lector, out decimal value) ? value : default(decimal);
+        }
+
+        public static List<string> Lectores { get; set; } = [];
+
+        public decimal this[string lector]
+        {
+            get => GetLectura(lector);
+            set => SetLectura(lector, value);
+        }
+    }
+
     public class EditarTemperaturasViewModel : BaseViewModel
     {
         private DateTime _fechaSeleccionada = DateTime.Today;
         private DataTable? _temperaturasLeidas = new();
         private List<Temperatura> _temperaturasEditadas = [];
-
+        //private ObservableCollection<TemperaturaObservable> _temperaturasObservables = [];
+        //private ObservableCollection<Temperatura> _temperaturasLeidas2 = [];
+        //ObservableCollection<TemperaturaPivot> _expandoTemp = [];
 
         public DateTime FechaSeleccionada
         {
@@ -29,7 +57,7 @@ namespace TermoMatic_MVVM.ViewModels
                     LeerTemperaturasDelDiaSeleccionado();
                 }catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message, "¡Cáspitas!", MessageBoxButton.OK);
+                    MessageBox.Show("No se pudieron leer las temperaturas\nDetalle: " + ex.Message, "¡Cáspitas!", MessageBoxButton.OK);
                 }
             }
         }
@@ -44,13 +72,41 @@ namespace TermoMatic_MVVM.ViewModels
             }
         }
 
-        //public ICommand? SeleccionarFechaCommand { get; }
+       // public ObservableCollection<Temperatura> TemperaturaObservables
+       // {
+       //     get { return _temperaturasLeidas2; }
+       //     set
+       //     {
+       //         _temperaturasLeidas2 = value;
+       //         OnPropertyChanged(nameof(TemperaturaObservables));
+       //     }
+       // }
+       //
+       // public ObservableCollection<TemperaturaPivot> TemperaturaPivots
+       // {
+       //     get { return _expandoTemp; }
+       //     set
+       //     {
+       //         _expandoTemp = value;
+       //         OnPropertyChanged(nameof(TemperaturaPivots));
+       //     }
+       // }
+       //
+        //public ObservableCollection<TemperaturaObservable> TemperaturaObservables
+        //{
+        //    get { return _temperaturasObservables; }
+        //    set
+        //    {
+        //        _temperaturasObservables = value;
+        //        OnPropertyChanged(nameof(TemperaturaObservables));
+        //    }
+        //}
+
         public ICommand? GuardarNuevasTemperaturasCommand { get; }
         public ICommand? EditarTemperaturasCommand { get; }
 
         public EditarTemperaturasViewModel()
         {
-            //SeleccionarFechaCommand = new RelayCommand(SeleccionarFecha);
             GuardarNuevasTemperaturasCommand = new RelayCommand(GuardarNuevasTemperaturas);
             EditarTemperaturasCommand = new ActionCommand<DataGridCellEditEndingEventArgs>(EditarRegistroTemperaturas);
         }
@@ -64,7 +120,9 @@ namespace TermoMatic_MVVM.ViewModels
 
             List<Temperatura> temps = Temperatura.LeerTemperaturasDelDiaSQL(dt, cadConexion);
 
-            //TemperaturaObservables = Temperatura.ConvertirListaEnObservableCollection(temps);
+            TemperaturasLeidas = Temperatura.ConvertirListaEnDataTableVisual(temps);
+            //TemperaturaObservables = new(temps);
+
         }
 
         private void GuardarNuevasTemperaturas()
@@ -81,7 +139,7 @@ namespace TermoMatic_MVVM.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "¡Cáspitas!", MessageBoxButton.OK);
+                MessageBox.Show("No se pudo guardar las temperaturas editadas.\nDetalle: " + ex.Message, "¡Cáspitas!", MessageBoxButton.OK);
             }
         }
 
@@ -124,6 +182,20 @@ namespace TermoMatic_MVVM.ViewModels
                     }
                 }
             }
+        }
+
+        public static dynamic pivot(IEnumerable<Temperatura> rows)
+        {
+            IDictionary<string, Object?> expando = new ExpandoObject();
+
+            expando["HORA"] = rows.FirstOrDefault()?.Registro;
+
+            foreach (var row in rows)
+            {
+                expando[row.Lector] = row.Lectura;
+            }
+
+            return expando;
         }
     }
 }

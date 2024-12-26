@@ -10,6 +10,7 @@ using System.Windows.Input;
 using TermoMatic_MVVM.Models;
 using System.IO;
 using TermoMatic;
+using System.Windows.Threading;
 
 namespace TermoMatic_MVVM.ViewModels
 {
@@ -64,7 +65,10 @@ namespace TermoMatic_MVVM.ViewModels
             }
             else
             {
-                MessageBox.Show("Error al seleccionar un archivo.", "¡Cáspitas!", MessageBoxButton.OK);
+               MessageBox.Show("Error al seleccionar un archivo.", "¡Cáspitas!", MessageBoxButton.OK);
+
+                //VentanaEmergente ventanaError = new("No se pudo leer el archivo seleciconado.", "OK", "¡Cáspitas!");
+                //ventanaError.ShowDialog();
             }
         }
 
@@ -76,21 +80,29 @@ namespace TermoMatic_MVVM.ViewModels
 
             if (RutaArchivo == null || RutaArchivo == "")
             {
+                //VentanaEmergente ventanaErrorRutaArchivo = new("Debe seleccionar un archivo válido primero.", "OK", "¡Cáspitas!");
+                //ventanaErrorRutaArchivo.ShowDialog();
+
                 MessageBox.Show("Debe seleccionar un archivo válido primero.", "¡Cáspitas!", MessageBoxButton.OK);
                 return;
             }
 
+            //VentanaEmergente ventanaProcesandoTemperaturas = new("Procesando las temperaturas del archivo...\nEspere por favor.", "", "¡Operación en proceso!");
             try
             {
+                //ventanaProcesandoTemperaturas.Show();
+                //Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate { ventanaProcesandoTemperaturas.Show(); }));
+
                 List<Temperatura> temps = Temperatura.LeerTemperaturasDeArchivo(RutaArchivo);
 
                 Temperatura.InsertarTemperaturasPorLotes(temps, cadConexion);
 
-                MessageBox.Show("Archivo importado.", "OK", MessageBoxButton.OK);
+                //ventanaProcesandoTemperaturas.CambiarTexto("Archivo importado.", "OK", "¡Operación Completada!");
+                MessageBox.Show("Archivo importado.", "¡Operación Completada!", MessageBoxButton.OK);
             }
             catch(Exception ex) 
             {
-                MessageBox.Show("ERROR: " + ex.Message, "OK", MessageBoxButton.OK);
+                MessageBox.Show("Error al importar el archivo.\nDetalle: " + ex.Message, "¡Cáspitas!", MessageBoxButton.OK);
             }
 
         }

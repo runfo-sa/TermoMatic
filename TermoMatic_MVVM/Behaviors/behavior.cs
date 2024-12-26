@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace TermoMatic_MVVM.Behaviors
 {
@@ -40,5 +41,55 @@ namespace TermoMatic_MVVM.Behaviors
                 Command.Execute(e);
             }
         }
+    }
+
+    public partial class NumericValidationBehavior : Behavior<DataGrid>
+    {
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+            AssociatedObject.PreviewTextInput += OnPreviewTextInput;
+            DataObject.AddPastingHandler(AssociatedObject, OnPaste);
+        }
+
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+            AssociatedObject.PreviewTextInput -= OnPreviewTextInput;
+            DataObject.RemovePastingHandler(AssociatedObject, OnPaste);
+        }
+
+        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsTextAllowed(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void OnPaste(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(string)))
+            {
+                string text = (string)e.DataObject.GetData(typeof(string));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            //return Regex.IsMatch(text, @"^[0-9]+$");
+            return CaracterNumeral().IsMatch(text);
+        }
+
+        [GeneratedRegex(@"^[-\.\d]+$")]
+        private static partial Regex CaracterNumeral();
     }
 }

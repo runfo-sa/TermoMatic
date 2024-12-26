@@ -76,7 +76,7 @@ namespace TermoMatic_MVVM.ViewModels
                     SeleccionarFecha();
                 }catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message, "¡Cáspitas!", MessageBoxButton.OK);
+                    MessageBox.Show("No se cargar la fecha seleccionada.\nDetalle: " + ex.Message, "¡Cáspitas!", MessageBoxButton.OK);
                 }
 
             }
@@ -98,10 +98,6 @@ namespace TermoMatic_MVVM.ViewModels
             AceptarConfiguracionCommand = new RelayCommandParameter(AceptarConfiguracion);
             ImprimirReporteCommand = new RelayCommand(ImprimirReporte);
             CancelarConfiguracionCommand = new RelayCommand(CancelarConfiguracion);
-
-            //ListaLectoresStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
-            //ListaLectoresStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseMoveEvent, new MouseEventHandler(s_PreviewMouseLeftButtonDown)));
-            //ListaLectoresStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(listbox1_Drop)));
         }
 
         private void SeleccionarFecha()
@@ -123,18 +119,18 @@ namespace TermoMatic_MVVM.ViewModels
             if (TemperaturasLeidas != null)
                 TemperaturasLeidas = Temperatura.OrdenarTabla(TemperaturasLeidas, "HORA", "ASC");
             
-            Table contenido = PDF.ConvertirDataTableEnTable(TemperaturasLeidas??new());
+            List<Table> contenido = PDF.ConvertirDataTableEnListaTable(TemperaturasLeidas??new(), 18);
 
             OpenFolderDialog openFolderDialog = new();
 
             if(openFolderDialog.ShowDialog() == true)
             {
                 PDF.CrearPDF(openFolderDialog.FolderName +@"\" + FechaSeleccionada.ToString("dd-MM-yyyy") + ".pdf", contenido, FechaSeleccionada);
-                MessageBox.Show("Listorti", "¡Cáspitas!", MessageBoxButton.OK);
+                MessageBox.Show("Se guardó el archivo con éxito.", "TermoMatic", MessageBoxButton.OK);
             }
             else
             { 
-                MessageBox.Show("Error al seleccionar un archivo.", "¡Cáspitas!", MessageBoxButton.OK);
+                MessageBox.Show("Error al seleccionar un archivo.", "TermoMatic: ¡Cáspitas!", MessageBoxButton.OK);
             }
         }
 
@@ -148,11 +144,12 @@ namespace TermoMatic_MVVM.ViewModels
                                                        .ToList();
 
 
-            DataTable nuevaTabla = new DataTable();
+            DataTable nuevaTabla = new();
 
             foreach (string? columnName in nuevoOrdenColumnas)
             {
-                nuevaTabla.Columns.Add(columnName, TemperaturasLeidas.Columns[columnName].DataType);
+                if(columnName != null)
+                    nuevaTabla.Columns.Add(columnName, TemperaturasLeidas.Columns[columnName].DataType);
             }
 
 

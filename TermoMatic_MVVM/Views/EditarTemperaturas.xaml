@@ -28,14 +28,16 @@
         </Grid.RowDefinitions>
 
         <DataGrid x:Name="dgTemperaturas"
-              ItemsSource="{Binding TemperaturaObservables}"
+              ItemsSource="{Binding TemperaturasLeidas}"
               FontSize="25"
               Grid.Row="1"
               FrozenColumnCount="1" 
               Margin="10,10,9,10"
-        >
+              CellEditEnding="dgTemperaturas_CellEditEnding">
+        
             <i:Interaction.Behaviors>
-                <behaviors:DataGridCellEditEndingBehavior Command="{Binding EditarTemperaturasCommand}" />
+                <behaviors:DataGridCellEditEndingBehavior Command="{Binding EditarTemperaturasCommand}"/>
+                <behaviors:NumericValidationBehavior/>
             </i:Interaction.Behaviors>
         </DataGrid>
 
